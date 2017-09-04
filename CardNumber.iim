@@ -1,0 +1,20 @@
+﻿SET !VAR1 EVAL("var prefix = '41252';var now = new Date(); var month = now.getMonth().toString(); var day = now.getDate().toString(); var h = now.getHours(); var m = now.getMinutes(); var s = now.getSeconds(); var res = prefix + month + day + h + m + s; for (var i = 0; i < 17 - res.length; i++) res+= Math.floor(Math.random()*10); var sum = 0; var pos = 0; var odd; while (pos < res.length) { if (pos % 2 == 0) { odd = parseInt(res[pos]) * 2; if (odd > 9) odd -= 9; sum += odd; } else { sum += parseInt(res[pos]) }; pos += 1; }; var checkdigit = sum % 10; if(checkdigit == 0) checkdigit = 0; else checkdigit = 10 - checkdigit; checkdigit = checkdigit.toString();res += checkdigit; res")
+
+PROMPT {{!VAR1}}
+
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:credit_card_number CONTENT={{!VAR1}}
+TAG POS=2 TYPE=DIV ATTR=TXT:01<SP>/<SP>January
+TAG POS=1 TYPE=LI ATTR=TXT:06<SP>/<SP>June
+TAG POS=2 TYPE=DIV ATTR=TXT:2016
+TAG POS=1 TYPE=LI ATTR=TXT:2018
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:cardholder CONTENT=IVAN<SP>IVANOV
+SET !ENCRYPTION NO
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=ID:cvv2 CONTENT=123
+
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=NAME:submit
+
+PAUSE
+
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:card_sum CONTENT=1.5
+WAIT SECONDS=1
+TAG POS=1 TYPE=A ATTR=ID:submit-step5_16
